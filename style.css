@@ -1,0 +1,490 @@
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Prevent horizontal overflow caused by full-bleed sections */
+html, body { overflow-x: hidden; }
+
+/* ===== BACKGROUND LAYER ===== */
+.bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75)), url('../assets/PixelArt/FiaryWallpaper.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: transform;
+}
+
+/* Base */
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    background: #111;
+    image-rendering: pixelated;
+}
+
+/* Top navigation */
+.topbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.233);
+    border: 1px solid rgba(255, 255, 255, 0.233);
+}
+.topbar-left, .topbar-right {
+    display: flex;
+    align-items: center;
+}
+.top-btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 6px 10px;
+    margin-right: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 180ms ease, transform 120ms ease;
+}
+.top-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Hero / Card */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 140px);
+    padding: 0 0 60px;
+    margin-bottom: 0px;
+    overflow: visible;
+}
+.card {
+    width: min(720px, 94%);
+    border-radius: 16px;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.233);
+}
+.title {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.info-box {
+    width: 88%;
+    max-width: 840px;
+    margin-bottom: 40px;
+    color: #ffffffbb;
+    font-size: 1.05rem;
+}
+
+/* Socials */
+.socials {
+    display: flex;
+    gap: 20px;
+    overflow: visible;
+}
+.social-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.social-btn {
+    width: 55px;
+    aspect-ratio: 1 / 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.233);
+    border-radius: 12px;
+    transition: transform 260ms cubic-bezier(.2, .9, .2, 1), background 360ms ease, color 360ms ease, box-shadow 260ms ease;
+    will-change: transform, box-shadow, backdrop-filter;
+    transform-origin: center center;
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    isolation: isolate;
+}
+.social-btn:hover {
+    transform: translateY(-6px) scale(1.02);
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.36);
+    color: #1e90ff;
+    box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+}
+.social-img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    image-rendering: auto;
+    object-fit: contain;
+    transition: filter 360ms ease;
+}
+.social-btn:hover .social-img {
+    filter: brightness(1.45) saturate(1.15);
+}
+
+/* Theme */
+body.light-theme { color: #111; }
+body.light-theme .card { background: rgba(255, 255, 255, 0.76); }
+body.light-theme .top-btn { background: rgba(0, 0, 0, 0.06); color: #111; border-color: rgba(0, 0, 0, 0.06); }
+body.light-theme .social-btn { background: rgba(0, 0, 0, 0.06); color: rgba(0, 0, 0, 0.8); }
+body.light-theme .social-btn:hover { background: rgba(0, 0, 0, 0.12); color: #1e3a8a; }
+
+/* Responsive tweaks */
+@media (max-width: 520px) {
+    .avatar { width: 140px; height: 140px; }
+    .social-btn { width: 48px; }
+    .info-box { width: 94%; font-size: 1rem; }
+    .social-img { width: auto; height: auto; max-width: 60%; max-height: 60%; }
+}
+
+/* ===== GALLERY SECTION ===== */
+.gallery-section {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 20px 0;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.233);
+    border-radius: 16px;
+    box-sizing: border-box;
+	margin-bottom: 20px;
+	display: none;  
+}
+
+.gallery-section.visible {
+    display: block;         /* or flex/grid if needed */
+    opacity: 0;
+    animation: fadeInSection 0.2s ease forwards;
+}
+
+@keyframes fadeInSection {
+    to { opacity: 1; }
+}
+
+.content-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-bottom: 70px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.content-container.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.gallery-title {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+    color: #111;
+}
+
+/* ===== MASONRY LAYOUT ===== */
+.gallery {
+    column-count: 4;
+    column-gap: 28px;
+    width: 100%;
+}
+
+/* ===== ITEM CARD (scroll reveal) ===== */
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 28px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.233);
+    border-radius: 18px;
+    overflow: hidden;
+    display: block;
+
+    /* Initial hidden state for scroll reveal */
+    opacity: 0;
+    transform: translateY(36px);
+    transition:
+        opacity 0.75s ease-out,
+        transform 0.75s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: opacity, transform;
+}
+
+.gallery-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Gentle stagger when items become visible */
+.gallery-item.visible:nth-of-type(4n+1) { transition-delay: 0.00s; }
+.gallery-item.visible:nth-of-type(4n+2) { transition-delay: 0.08s; }
+.gallery-item.visible:nth-of-type(4n+3) { transition-delay: 0.16s; }
+.gallery-item.visible:nth-of-type(4n+4) { transition-delay: 0.24s; }
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== IMAGE BEHAVIOR ===== */
+.gallery-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: pixelated;
+    border-radius: 18px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+    .gallery { column-count: 3; }
+    .gallery-item.visible:nth-of-type(2n+1) { transition-delay: 0.00s; }
+    .gallery-item.visible:nth-of-type(2n)   { transition-delay: 0.14s; }
+}
+
+@media (max-width: 600px) {
+    .gallery { column-count: 2; }
+    .gallery-item.visible { transition-delay: 0.06s !important; }
+}
+
+/* Animations & overlay (page load) */
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(14px); visibility: hidden; }
+.reveal.animate {
+    visibility: visible;
+    animation: slideUpFade 800ms cubic-bezier(.2, .9, .2, 1) forwards;
+    animation-delay: var(--delay, 0ms);
+}
+.page-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgb(99, 123, 158);
+    z-index: 1200;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 1000ms ease;
+}
+.page-overlay.fade-out { opacity: 0; }
+body.page-loading > :not(.page-overlay) { visibility: hidden !important; }
+
+/* ===== CATEGORY SELECTOR ===== */
+.category-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.category-container {
+    position: relative;
+    width: 680px;
+    height: 60px;
+    margin: 0 auto;
+    overflow: hidden; /* prevent overflow on mobile */
+}
+
+/* Desktop: 5 buttons visible */
+.category-btn {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--pos) * 140px);
+    transform: translateY(-50%) scale(var(--scale));
+    transition: 
+        left 0.5s ease,
+        transform 0.5s ease,
+        background 360ms ease,
+        color 360ms ease,
+        box-shadow 260ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.233);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    backdrop-filter: blur(2px);
+    isolation: isolate;
+    width: 120px;
+    height: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    will-change: transform, left, box-shadow;
+}
+
+.category-btn:hover {
+    transform: translateY(-50%) scale(var(--scale)) translateY(-6px);
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.36);
+    box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+}
+
+.category-btn.selected {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+/* Mobile layout: only 3 buttons visible, centered */
+@media (max-width: 720px) {
+    .category-container {
+        width: 100%;
+        max-width: 360px; /* enough for 3 buttons */
+        height: 54px;
+    }
+
+    .category-btn {
+        left: calc(50% + (var(--pos) - 2) * 110px); /* center + offset */
+        width: 100px;
+        height: 46px;
+        font-size: 0.92rem;
+        transform: translate(-50%, -50%) scale(var(--scale));
+    }
+
+    .category-btn:hover {
+        transform: translate(-50%, -50%) scale(var(--scale)) translateY(-6px);
+    }
+
+    /* Slightly smaller side buttons on mobile */
+    .category-btn[data-pos="0"],
+    .category-btn[data-pos="4"] {
+        transform: translate(-50%, -50%) scale(calc(var(--scale) * 0.92));
+        opacity: 0.85;
+    }
+
+    /* Hide buttons that would be outside the 3 visible slots */
+    .category-btn:not([data-pos="1"]):not([data-pos="2"]):not([data-pos="3"]) {
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+}
+
+/* Light theme (unchanged) */
+body.light-theme .category-btn {
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .category-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+body.light-theme .category-btn.selected {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 720px) {
+    /* ... previous mobile rules ... */
+
+    /* Stronger fade on outer buttons */
+    .category-btn[data-pos="1"],
+    .category-btn[data-pos="3"] {
+        opacity: 0.92;
+    }
+
+    .category-btn[data-pos="0"],
+    .category-btn[data-pos="4"] {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.75);
+    }
+}
+
+
+/* ===== SCROLLBAR DESING ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff00;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffffce;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff #ffffff00;
+}
+
+html {
+    scroll-behavior: auto;
+}
+
+.hero,
+.hero * {
+    user-select: none;          /* Standard modern syntax */
+    -webkit-user-select: none;  /* Safari/Chrome */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* Edge/IE */
+}
+
+.avatar {
+    /* Prevent drag / ghost image on click-and-hold */
+    -webkit-user-drag: none;           /* Chrome, Safari, Edge */
+    user-select: none;                  /* Also prevents text-like selection */
+    pointer-events: none;               /* Optional: disables all pointer interaction */
+}
+
+/* Prevent dragging on ALL images across the site */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;           /* optional: disables hover/click too — remove if you want hover effects */
+}
+
+/* Prevent text selection + dragging on buttons and their text */
+.top-btn,
+.category-btn,
+.gallery-item img,
+.gallery-item {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+/* Extra safety: disable pointer events on gallery images if you don't need interaction */
+.gallery-img {
+    pointer-events: none;
+}
+
+/* If you still want hover lift effect on gallery items, keep pointer-events on the container */
+.gallery-item {
+    pointer-events: auto;           /* allows :hover on the whole card */
+}
+
+.gallery-item img {
+    pointer-events: none;           /* but image itself ignores clicks/drags */
+}

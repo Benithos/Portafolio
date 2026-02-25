@@ -1,93 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Benithos - Pixel Art</title>
-  <link rel="stylesheet" href="styles/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Benithos - Pixel Art</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <header>
-    <nav class="topbar">
-      <div class="topbar-left">
-        <button id="langBtn" class="top-btn">EN</button>
-      </div>
-      <div class="topbar-right">
-        <button id="themeToggle" class="top-btn">🌙</button>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="card">
-        <img src="assets/Icons/Pfp.png" alt="Avatar" class="avatar pixel-art">
-        <h2 class="title">Benithos</h2>
-        <div class="info-box">
-          <p>Hii~ I draw pixels. Also like to code sometimes.</p>
+    <div class="bg-layer"></div>
+    <header>
+        <nav class="topbar">
+            <div class="topbar-left">
+                <button id="langBtn" class="top-btn">EN</button>
+            </div>
+            <div class="topbar-right">
+                <button id="themeToggle" class="top-btn">🌙</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="card">
+                <img src="assets/Icons/Pfp.png" alt="Avatar" class="avatar pixel-art">
+                <h2 class="title">Benithos</h2>
+                <div class="info-box">
+                    <p>Hii~ I draw pixels. Also like to code sometimes.</p>
+                </div>
+                <div class="socials" aria-hidden="true">
+                    <div class="social-wrap"><a class="social-btn" href="https://x.com/BenithosDX" title="X" target="_blank" rel="noopener noreferrer"><img src="assets/Icons/X.png" alt="X" class="social-img"></a></div>
+                    <div class="social-wrap"><a class="social-btn" href="https://bsky.app/profile/benithos.bsky.social" title="Bluesky" target="_blank" rel="noopener noreferrer"><img src="assets/Icons/bluesky.png" alt="Bluesky" class="social-img"></a></div>
+                    <div class="social-wrap"><a class="social-btn" href="https://vgen.co/Benithos" title="Vgen" target="_blank" rel="noopener noreferrer"><img src="assets/Icons/VGen.png" alt="Vgen" class="social-img"></a></div>
+                </div>
+            </div>
+        </section>
+        <div class="category-selector">
+            <div class="category-container">
+                <button class="category-btn" data-category="fiary">Fiary</button>
+                <button class="category-btn" data-category="hololive">About Me</button>
+                <button class="category-btn" data-category="all">Gallery</button>
+                <button class="category-btn" data-category="sprites">Commission</button>
+                <button class="category-btn" data-category="other">Terms & Conditions</button>
+            </div>
         </div>
+        <section class="gallery-section">
+            <div class="all-container content-container">
+                <div class="gallery" aria-label="Pixel art gallery">
+                    <div class="gallery-item"><img src="assets/PixelArt/FiaryAPose.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/FiaryPresent.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/FiaryLive2D.webp" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/akirose.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/aqua.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/ayame.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/choco.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/fbk1.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/fbk2.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/flare.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/Haato.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/kanata.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/korone.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/luna.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/marine.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/matsuri.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/mel.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/mio.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/noel.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/okayu.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/pekora.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/rushia.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/shion.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/subaru.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/towa.png" class="gallery-img pixel-art"></div>
+                    <div class="gallery-item"><img src="assets/PixelArt/HoloMedSprites/watame.png" class="gallery-img pixel-art"></div>
+                </div>
+            </div>
+            <div class="fiary-container content-container" style="display: none;">
+                <p>Content coming soon. <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+            </div>
+            <div class="hololive-container content-container" style="display: none;">
+                <p>Content coming soon. <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+            </div>
+            <div class="sprites-container content-container" style="display: none;">
+                <p>Content coming soon. <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+            </div>
+            <div class="other-container content-container" style="display: none;">
+                <p>Content coming soon. <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+            </div>
+        </section>
 
-        <div class="socials" aria-hidden="true">
-          <div class="social-wrap"><a class="social-btn" href="https://x.com/BenithosDX" title="X" target="_blank" rel="noopener noreferrer"><img src="assets/Icons/X.png" alt="X" class="social-img"></a></div>
-          <div class="social-wrap"><a class="social-btn" href="https://bsky.app/profile/benithos.bsky.social" title="Bluesky" target="_blank" rel="noopener noreferrer"><img src="assets/Icons/bluesky.png" alt="Bluesky" class="social-img"></a></div>
-          <div class="social-wrap"><a class="social-btn" href="https://vgen.co/Benithos" title="Vgen" target="_blank" rel="noopener noreferrer"><img src="assets/Icons/VGen.png" alt="Vgen" class="social-img"></a></div>
-        </div>
-      </div>
-    </section>
-<!--
-    <section class="gallery-section">
-      <div class="gallery-container">
-        <h3 class="gallery-title">Gallery</h3>
-        <div class="gallery" aria-label="Pixel art gallery">
-            <img src="assets/PixelArt/FiaryAPose.png" alt="Fiary A Pose" class="gallery-img pixel-art">
-            <img src="assets/PixelArt/FiaryPresent.png" alt="Fiary Present" class="gallery-img pixel-art">
+        <footer>
+          <p>© 2026 Benithos</p>
+        </footer>
+    </main>
 
-             Placeholder copies
-            <img src="assets/PixelArt/FiaryAPose.png" alt="Placeholder 1" class="gallery-img pixel-art">
-            <img src="assets/PixelArt/FiaryPresent.png" alt="Placeholder 2" class="gallery-img pixel-art">
-            <img src="assets/PixelArt/FiaryAPose.png" alt="Placeholder 3" class="gallery-img pixel-art">
-            <img src="assets/PixelArt/FiaryPresent.png" alt="Placeholder 4" class="gallery-img pixel-art">
-            <img src="assets/PixelArt/FiaryAPose.png" alt="Placeholder 5" class="gallery-img pixel-art">
-        </div>
-      </div>
-    </section>
--->
-  </main>
-
-  <footer>
-    <p>© 2026 Benithos</p>
-  </footer>
-
-  <script>
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.scrollTo(0, 0);
-    window.addEventListener('pageshow', e => { if (e.persisted) window.scrollTo(0,0); });
-
-    const themeBtn = document.getElementById('themeToggle');
-    const langBtn = document.getElementById('langBtn');
-    const body = document.body;
-    function updateThemeUI(){ themeBtn.textContent = body.classList.contains('light-theme') ? '☀️' : '🌙'; }
-    themeBtn.addEventListener('click', () => { body.classList.toggle('light-theme'); updateThemeUI(); });
-    const languages = ['EN','ES','FR']; let langIndex = 0;
-    langBtn.addEventListener('click', () => { langIndex = (langIndex+1) % languages.length; langBtn.textContent = languages[langIndex]; });
-    updateThemeUI();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const hold = 500, fade = 700, overlap = 500;
-      document.body.classList.add('page-loading');
-      const overlay = document.createElement('div'); overlay.className = 'page-overlay'; document.body.appendChild(overlay);
-      setTimeout(()=> requestAnimationFrame(()=> overlay.classList.add('fade-out')), hold);
-      const revealStartAt = hold + Math.max(0, fade - overlap);
-      setTimeout(()=>{
-        const nodeList = document.querySelectorAll('.topbar, header, nav, main, .card, .card * , footer');
-        const elems = Array.from(new Set(Array.from(nodeList))).filter(Boolean).filter(el => !el.closest('.social-btn'));
-        elems.forEach((el,i)=>{ el.classList.add('reveal'); el.style.setProperty('--delay', `${i*120}ms`); });
-        document.body.classList.remove('page-loading');
-        requestAnimationFrame(()=> elems.forEach(el=> el.classList.add('animate')));
-      }, revealStartAt);
-      overlay.addEventListener('transitionend', ()=> overlay.remove(), { once: true });
-    });
-  </script>
+    <script src="main.js" defer></script>
 </body>
 </html>
