@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Benithos - Pixel Art</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="topbar">
+      <div class="topbar-left">
+        <button id="langBtn" class="top-btn">EN</button>
+      </div>
+      <div class="topbar-right">
+        <button id="themeToggle" class="top-btn">🌙</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="card">
+        <img src="assets/Icons/Pfp.png" alt="Avatar" class="avatar pixel-art">
+        <h2 class="title">Benithos</h2>
+        <div class="info-box">
+          <p>Hii~ I draw pixels. Also like to code sometimes.</p>
+        </div>
+
+        <div class="socials" aria-hidden="true">
+          <div class="social-wrap"><a class="social-btn" href="#" title="X"><img src="assets/Icons/X.png" alt="X" class="social-img"></a></div>
+          <div class="social-wrap"><a class="social-btn" href="#" title="Bluesky"><img src="assets/Icons/bluesky.png" alt="Bluesky" class="social-img"></a></div>
+          <div class="social-wrap"><a class="social-btn" href="#" title="Vgen"><img src="assets/Icons/VGen.png" alt="Vgen" class="social-img"></a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="gallery-container">
+        <h3 class="gallery-title">Gallery</h3>
+        <div class="gallery" aria-label="Pixel art gallery">
+            <img src="assets/PixelArt/FiaryAPose.png" alt="Fiary A Pose" class="gallery-img pixel-art">
+            <img src="assets/PixelArt/FiaryPresent.png" alt="Fiary Present" class="gallery-img pixel-art">
+
+            <!-- Placeholder copies -->
+            <img src="assets/PixelArt/FiaryAPose.png" alt="Placeholder 1" class="gallery-img pixel-art">
+            <img src="assets/PixelArt/FiaryPresent.png" alt="Placeholder 2" class="gallery-img pixel-art">
+            <img src="assets/PixelArt/FiaryAPose.png" alt="Placeholder 3" class="gallery-img pixel-art">
+            <img src="assets/PixelArt/FiaryPresent.png" alt="Placeholder 4" class="gallery-img pixel-art">
+            <img src="assets/PixelArt/FiaryAPose.png" alt="Placeholder 5" class="gallery-img pixel-art">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Benithos</p>
+  </footer>
+
+  <script>
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    window.addEventListener('pageshow', e => { if (e.persisted) window.scrollTo(0,0); });
+
+    const themeBtn = document.getElementById('themeToggle');
+    const langBtn = document.getElementById('langBtn');
+    const body = document.body;
+    function updateThemeUI(){ themeBtn.textContent = body.classList.contains('light-theme') ? '☀️' : '🌙'; }
+    themeBtn.addEventListener('click', () => { body.classList.toggle('light-theme'); updateThemeUI(); });
+    const languages = ['EN','ES','FR']; let langIndex = 0;
+    langBtn.addEventListener('click', () => { langIndex = (langIndex+1) % languages.length; langBtn.textContent = languages[langIndex]; });
+    updateThemeUI();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const hold = 500, fade = 700, overlap = 500;
+      document.body.classList.add('page-loading');
+      const overlay = document.createElement('div'); overlay.className = 'page-overlay'; document.body.appendChild(overlay);
+      setTimeout(()=> requestAnimationFrame(()=> overlay.classList.add('fade-out')), hold);
+      const revealStartAt = hold + Math.max(0, fade - overlap);
+      setTimeout(()=>{
+        const nodeList = document.querySelectorAll('.topbar, header, nav, main, .card, .card * , footer');
+        const elems = Array.from(new Set(Array.from(nodeList))).filter(Boolean).filter(el => !el.closest('.social-btn'));
+        elems.forEach((el,i)=>{ el.classList.add('reveal'); el.style.setProperty('--delay', `${i*120}ms`); });
+        document.body.classList.remove('page-loading');
+        requestAnimationFrame(()=> elems.forEach(el=> el.classList.add('animate')));
+      }, revealStartAt);
+      overlay.addEventListener('transitionend', ()=> overlay.remove(), { once: true });
+    });
+  </script>
+</body>
+</html>
