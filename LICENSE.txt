@@ -1,0 +1,12 @@
+Copyright (c) 2026 Benithos
+
+All rights reserved.
+
+This software and associated files (the "Software") may not be copied,
+modified, distributed, sublicensed, or used in any way without explicit
+written permission from the author.
+
+The artwork included in this repository is the intellectual property of
+Benithos and is not licensed for reuse, reproduction, or distribution.
+
+Unauthorized use may result in legal action.
