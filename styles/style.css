@@ -4,17 +4,42 @@
 html, body { overflow-x: hidden; }
 
 /* ===== BACKGROUND LAYER ===== */
+/* Sharp background – no gradient here anymore */
 .bg-layer {
     position: fixed;
     inset: 0;
-    z-index: -1;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75)), url('FiaryWallpaper.png');
+    z-index: -3;  /* furthest back */
+    background-image: url('FiaryWallpaper.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     will-change: transform;
 }
 
+/* Blurred background – no gradient here */
+.bg-blur-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url('FiaryWallpaper-blurred.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+/* Gradient overlay – applies darkening to both layers below */
+.bg-gradient-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;  /* on top of both bg layers, but behind content */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.75));
+    pointer-events: none;
+}
 /* Base */
 body {
     font-family: Arial, sans-serif;

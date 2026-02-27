@@ -1,7 +1,7 @@
-// script.js
+// main.js
 
-// Custom smooth scroll function with controllable duration
-function smoothScrollTo(targetY, duration = 1400) {
+// Helper: Custom smooth scroll with controllable duration
+function smoothScrollTo(targetY, duration = 1200) {
     const startY = window.pageYOffset;
     const distance = targetY - startY;
     const startTime = performance.now();
@@ -10,7 +10,7 @@ function smoothScrollTo(targetY, duration = 1400) {
         const elapsed = time - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        // EaseInOutQuad easing – smooth acceleration and deceleration
+        // EaseInOutQuad easing
         const ease = progress < 0.5 
             ? 2 * progress * progress 
             : 1 - Math.pow(-2 * progress + 2, 2) / 2;
@@ -25,18 +25,34 @@ function smoothScrollTo(targetY, duration = 1400) {
     requestAnimationFrame(animate);
 }
 
+// Helper: Shuffle array (Fisher-Yates)
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
+
+// ───────────────────────────────────────────────
+//   Page setup & smooth scroll restoration
+// ───────────────────────────────────────────────
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 window.addEventListener('pageshow', e => { 
-    if (e.persisted) window.scrollTo(0,0); 
+    if (e.persisted) window.scrollTo(0, 0); 
 });
 
+
+// ───────────────────────────────────────────────
+//   Theme & Language toggle
+// ───────────────────────────────────────────────
 const themeBtn = document.getElementById('themeToggle');
 const langBtn = document.getElementById('langBtn');
 const body = document.body;
 
-function updateThemeUI(){
+function updateThemeUI() {
     themeBtn.textContent = body.classList.contains('light-theme') ? '☀️' : '🌙';
 }
 
@@ -45,22 +61,28 @@ themeBtn.addEventListener('click', () => {
     updateThemeUI(); 
 });
 
-const languages = ['EN','ES','FR'];
+const languages = ['EN', 'ES', 'FR'];
 let langIndex = 0;
 langBtn.addEventListener('click', () => { 
-    langIndex = (langIndex+1) % languages.length; 
+    langIndex = (langIndex + 1) % languages.length; 
     langBtn.textContent = languages[langIndex]; 
 });
 
 updateThemeUI();
 
+
+// ───────────────────────────────────────────────
+//   Page load animation (reveal elements)
+// ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     const hold = 500, fade = 700, overlap = 500;
     document.body.classList.add('page-loading');
+
     const overlay = document.createElement('div');
     overlay.className = 'page-overlay';
     document.body.appendChild(overlay);
-    setTimeout(()=> requestAnimationFrame(()=> overlay.classList.add('fade-out')), hold);
+
+    setTimeout(() => requestAnimationFrame(() => overlay.classList.add('fade-out')), hold);
 
     const revealStartAt = hold + Math.max(0, fade - overlap);
 
@@ -80,16 +102,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('page-loading');
         requestAnimationFrame(() => elems.forEach(el => el.classList.add('animate')));
 
+        // Show gallery section and load initial content
         setTimeout(() => {
-            document.querySelector('.gallery-section').classList.add('visible');
-            const initialCategory = 'all';
-            switchContent(initialCategory);
-        }, revealStartAt + 400); 
+            const gallerySection = document.querySelector('.gallery-section');
+            if (gallerySection) gallerySection.classList.add('visible');
+
+            switchContent('all');
+        }, revealStartAt + 400);
 
     }, revealStartAt);
 
     overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
 });
+
 
 // ───────────────────────────────────────────────
 //   Category buttons + scroll reveal logic
@@ -104,12 +129,10 @@ categoryBtns.forEach((btn, index) => {
     btn.setAttribute('data-pos', index);
     btn.style.setProperty('--pos', index);
     btn.style.setProperty('--scale', scales[index]);
-    if (index === 2) {
-        btn.classList.add('selected');
-    }
+    if (index === 2) btn.classList.add('selected');
 });
 
-// IntersectionObserver for progressive reveal
+// IntersectionObserver for progressive item reveal
 let observer;
 
 function initGalleryObserver() {
@@ -119,7 +142,7 @@ function initGalleryObserver() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // one-time reveal
+                observer.unobserve(entry.target);
             }
         });
     }, {
@@ -128,12 +151,10 @@ function initGalleryObserver() {
         threshold: 0.08
     });
 
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        observer.observe(item);
-    });
+    document.querySelectorAll('.gallery-item').forEach(item => observer.observe(item));
 }
 
-// Example: shuffle when loading the "all" category
+// Switch content with shuffle on "all"
 function switchContent(category) {
     const newContainer = document.querySelector(`.${category}-container`);
     if (!newContainer) return;
@@ -145,9 +166,7 @@ function switchContent(category) {
         currentActive.querySelectorAll('.gallery-item.visible').forEach(item => {
             item.classList.remove('visible');
         });
-        setTimeout(() => {
-            currentActive.style.display = 'none';
-        }, 280);
+        setTimeout(() => currentActive.style.display = 'none', 280);
     }
 
     setTimeout(() => {
@@ -155,20 +174,18 @@ function switchContent(category) {
         void newContainer.offsetWidth;
         newContainer.classList.add('active');
 
-        // ─── Randomize order only for the "all" gallery ───
+        // Shuffle only "all" category
         if (category === 'all') {
             const gallery = newContainer.querySelector('.gallery');
             if (gallery) {
                 const items = Array.from(gallery.children);
                 shuffleArray(items);
-                
-                // Remove all children and re-append in new order
                 gallery.innerHTML = '';
                 items.forEach(item => gallery.appendChild(item));
             }
         }
 
-        // Re-observe for scroll reveal
+        // Re-observe new items
         setTimeout(() => {
             newContainer.querySelectorAll('.gallery-item:not(.visible)').forEach(item => {
                 observer.observe(item);
@@ -179,7 +196,10 @@ function switchContent(category) {
 
 initGalleryObserver();
 
-// Click handler for category buttons
+
+// ───────────────────────────────────────────────
+//   Category button click handler (merged)
+// ───────────────────────────────────────────────
 categoryContainer.addEventListener('click', (e) => {
     const btn = e.target.closest('.category-btn');
     if (!btn) return;
@@ -187,7 +207,7 @@ categoryContainer.addEventListener('click', (e) => {
     const clickedPos = parseInt(btn.getAttribute('data-pos'));
     const center = 2;
 
-    // Only rotate if it's NOT already the center button
+    // Rotate only if not already center
     if (clickedPos !== center) {
         const shift = clickedPos - center;
 
@@ -201,32 +221,50 @@ categoryContainer.addEventListener('click', (e) => {
         });
     }
 
-    // Always get the current selected category and switch content
+    // Switch content
     const selectedBtn = document.querySelector('.category-btn.selected');
     const currentCategory = selectedBtn.getAttribute('data-category');
     switchContent(currentCategory);
 
-    // Always scroll to the category row (even if already selected)
+    // Always scroll to category row
     setTimeout(() => {
         const selector = document.querySelector('.category-selector');
         if (!selector) return;
 
         const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 0;
         const extraPadding = 16;
-        
         const targetY = selector.getBoundingClientRect().top 
                       + window.pageYOffset 
                       - topbarHeight 
                       - extraPadding;
 
-        smoothScrollTo(targetY, 700); // your slow scroll
+        smoothScrollTo(targetY, 700);
     }, 400);
 });
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+
+// ───────────────────────────────────────────────
+//   Scroll-based background blur fade
+// ───────────────────────────────────────────────
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    const blurLayer = document.querySelector('.bg-blur-layer');
+    const hero = document.querySelector('.hero');
+    if (!blurLayer || !hero) return;
+
+    const heroBottom = hero.getBoundingClientRect().bottom;
+
+    // Fade in when scrolled past hero (down)
+    if (heroBottom <= 0 && currentScrollY > lastScrollY) {
+        blurLayer.style.opacity = '1';
+    } 
+    // Fade out when hero re-enters view (up)
+    else if (heroBottom > 0 && currentScrollY < lastScrollY) {
+        blurLayer.style.opacity = '0';
     }
-    return array;
-}
+
+    lastScrollY = currentScrollY;
+});
